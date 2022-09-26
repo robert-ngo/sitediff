@@ -30,6 +30,6 @@ jobs:
       - name: Install dependencies
         run: bundle install
       - name: Run tests
-        run: bundle list
-#      - name: Run release
-#        run: bundle exec release
+        run: rake --version
+      - name: Run release
+        run: rake release
