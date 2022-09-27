@@ -31,7 +31,7 @@ jobs:
           # Should breaking changes before 1.0.0 produce minor bumps?
           bump-minor-pre-major: true
           # Path to our version file to increment
-#          version-file: "lib/release/please/demo/version.rb"
+          version-file: "lib/version.rb"
 #  test:
 #    runs-on: ubuntu-latest
 #    steps:
