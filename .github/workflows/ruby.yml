@@ -31,5 +31,12 @@ jobs:
         run: bundle install
       - name: Run tests
         run: rake --version
+      - name: Setup
+        run: |
+          git config --global user.email "robert.ngo@evolvingweb.com"
+          git config --global user.name "Robert Ngo"
+          git status
+          curl -u robertngo https://rubygems.org/api/v1/api_key.yaml > ~/.gem/credentials
+          chmod 0600 ~/.gem/credentials
       - name: Run release
         run: rake release
