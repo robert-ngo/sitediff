@@ -48,12 +48,13 @@ class SiteDiff
 
     ##
     # Creates a UriWrapper.
-    def initialize(uri, curl_opts = DEFAULT_CURL_OPTS, debug: true)
+    def initialize(uri, curl_opts = DEFAULT_CURL_OPTS, debug: true, referrer: '')
       @uri = uri.respond_to?(:scheme) ? uri : Addressable::URI.parse(uri)
       # remove trailing '/'s from local URIs
       @uri.path.gsub!(%r{/*$}, '') if local?
       @curl_opts = curl_opts
       @debug = debug
+      @referrer = referrer
     end
 
     ##
@@ -116,7 +117,13 @@ class SiteDiff
     def typhoeus_request
       params = @curl_opts.dup
       # Allow basic auth
-      params[:userpwd] = "#{@uri.user}: #{@uri.password}" if @uri.user
+      params[:userpwd] = "#{@uri.user}:#{@uri.password}" if @uri.user
+
+      # params['verbose'] = true
+      # params['ssl_verifypeer'] = false
+      # params['ssl_verifyhost'] = 0
+      # params['followlocation'] = true
+      # puts to_s
 
       req = Typhoeus::Request.new(to_s, params)
 
@@ -136,13 +143,13 @@ class SiteDiff
           raise if @debug
 
           yield ReadResult.error(
-            "Parsing error for #{@uri}: #{e.message}"
+            "Parsing error for #{@uri}: #{e.message}  From page: #{@referrer}"
           )
         rescue StandardError => e
           raise if @debug
 
           yield ReadResult.error(
-            "Unknown parsing error for #{@uri}: #{e.message}"
+            "Unknown parsing error for #{@uri}: #{e.message}  From page: #{@referrer}"
           )
         end
       end
@@ -150,17 +157,17 @@ class SiteDiff
       req.on_failure do |resp|
         if resp&.status_message
           yield ReadResult.error(
-            "HTTP error when loading #{@uri} : [#{resp.response_code}] #{resp.status_message}",
+            "HTTP error when loading #{@uri} : [#{resp.response_code}] #{resp.status_message}  From: #{@referrer}",
             resp.response_code
           )
         elsif (msg = resp.options[:return_code])
           yield ReadResult.error(
-            "Connection error when loading #{@uri} : [#{resp.options[:return_code]}] #{resp.status_message} #{msg}",
+            "Connection error when loading #{@uri} : [#{resp.options[:return_code]}] #{msg}  From: #{@referrer}",
             resp.response_code
           )
         else
           yield ReadResult.error(
-            "Unknown error when loading #{@uri} : [#{resp.response_code}] #{resp.status_message}",
+            "Unknown error when loading #{@uri} : [#{resp.response_code}] #{resp.status_message} From: #{@referrer}",
             resp.response_code
           )
         end

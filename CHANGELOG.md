@@ -1,6 +1,36 @@
 # SiteDiff Change Log
 
 Contains noteworthy changes made to SiteDiff.
+## Version 1.2.9
+- Fixing bug with version command within the Docker image.
+
+## Version 1.2.8
+- Dependency updates.
+
+## Version 1.2.7
+- Diff performance improvement.  Preset rules were being repeatedly re-added to the list of rules.
+
+## Version 1.2.5
+- Fix issue with whitespace in URLs.
+- Updates for Drupal preset for Drupal 8, 9, 10.
+- Bump nokogiri from 1.14.2 to 1.14.3
+- Fix basic auth derived from URL syntax
+
+## Version 1.2.4
+- Fix issue with 'store' command.
+
+## Version 1.2.3
+- Fix issue with nil object during diff report generation.
+- Update to export documentation.
+
+## Version 1.2.2
+- Security update for Nokogiri.
+- Minor code updates.
+
+## Version 1.2.1
+- Fixed a bug with report exporting.
+- Prevents crawling the same site twice if the before and after urls are the same.
+- Adding a referrer to the crawler errors.
 
 ## Version 1.2.0
 - Updated requirement to Ruby 3.1.2.

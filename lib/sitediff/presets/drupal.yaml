@@ -20,16 +20,16 @@ sanitization:
     selector: script
     pattern: '(src="[^"]*/files/js/js_)[-\w]{40,43}\.js"'
     substitute: '\1DRUPAL_AGGREGATED_JS.js"'
-  - title: Strip CSS/JS cache IDs
-    selector: style, script
-    pattern: '("[^"]*\.(js|css))\?[a-z0-9]{6}"'
-    substitute: '\1'
+  # - title: Strip CSS/JS cache IDs
+  #   selector: style, script
+  #   pattern: '("[^"]*\.(js|css))\?[a-z0-9]{6}"'
+  #   substitute: '\1'
   - title: Strip Drupal JS version tags
     selector: script
     pattern: '(src="[^"]*/misc/\w+\.js)?v=\d+\.\d+"'
     substitute: '\1'
   - title: Strip domain names from absolute URLs
-    pattern: 'http:\/\/[a-zA-Z0-9.:-]+'
+    pattern: 'https?:\/\/[a-zA-Z0-9.:-]+'
     substitute: '__domain__'
   - title: Strip form build ID
     selector: input
@@ -61,3 +61,27 @@ sanitization:
     selector: script
     pattern: 'js_[-\w]{40,43}\\?\.js'
     substitute: 'js__ID__.js'
+  - pattern: ' data-contextual-token="[^\"]*"'
+    selector: 'div'
+    substitute: ''
+  - pattern: ' data-drupal-selector="[^\"]*"'
+    selector: 'div'
+    substitute: ''
+  - pattern: ' title="[^\"]*"'
+    selector: 'input'
+    substitute: ''
+  - pattern: 'js-view-dom-id-[a-zA-Z0-9]+'
+    selector: 'div'
+    substitute: 'js-view-dom-id-__HASH__'
+  - pattern: 'value="[^\"]*"'
+    selector: 'input'
+    substitute: 'value="HASH"'
+  - pattern: 'itok=[A-Za-z0-9\-_]+'
+    substitute: ''
+  - pattern: 'hash=[^"]+"'
+    selector: 'iframe'
+    substitute: 'hash=HASH'
+dom_transform:
+  # Strip Drupal.settings (>8.0)
+  - type: remove
+    selector: 'script[data-drupal-selector="drupal-settings-json"]'

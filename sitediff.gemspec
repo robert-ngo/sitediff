@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name        = 'sitediff'
-  s.version     = '1.2.0'
+  s.version     = '1.2.9'
   s.required_ruby_version = '>= 3.1.2'
   s.summary     = 'Compare two versions of a site with ease!'
   s.description = <<DESC
@@ -35,14 +35,14 @@ DESC
 
   s.add_dependency 'minitar', '~> 0.9'
   s.add_dependency 'thor', '~> 1.2.1'
-  s.add_dependency 'typhoeus', '~> 1.4.0'
+  s.add_dependency 'typhoeus', '>= 1.1.1'
 
   # A bug in rubygems can break rainbow 2.2
   # https://github.com/bundler/bundler/issues/5357
   s.add_dependency 'rainbow', '~> 3.1.1'
 
   # Nokogiri 1.7 is not supported on Ruby 2.0.
-  s.add_dependency 'nokogiri', '>= 1.13.6'
+  s.add_dependency 'nokogiri', '>= 1.14.2'
 
   # Diffy and addressable have a max version for Ruby 1.9.
   s.add_dependency 'addressable', '>= 2.5.2', '< 2.9.0'

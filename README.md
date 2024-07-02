@@ -294,6 +294,13 @@ Generate a gzipped tar file containing the HTML report instead of generating
 and serving live web pages, this option overrides `--report-format`, forcing
 HTML.
 
+```
+sitediff diff --export
+sitediff diff -e
+```
+
+This will perform the diff and export the results in a gzipped tar file.
+
 ### Running inside containers
 
 If you run SiteDiff inside a container or virtual machine, the URLs in its
@@ -441,7 +448,7 @@ before comparison:
 dom_transform:
 # Remove current time block
   - type: remove
-  - selector: div#block-time
+    selector: div#block-time
 ```
 
 #### strip
@@ -458,7 +465,7 @@ To transform `<h1>  Foo and Bar\n  </h1>` to `<h1>Foo and Bar<\h1>`:
 dom_transform:
 # Strip H1 tags
   - type: strip
-  - selector: h1
+    selector: h1
 ```
 
 #### unwrap
@@ -655,7 +662,7 @@ EG:
   </div>
 </region>
 <region id="body">
-  <div class=".field-name-attribution">
+  <div class="field-name-attribution">
     <p>Lorem ipsum...
   </div>
 </region>
