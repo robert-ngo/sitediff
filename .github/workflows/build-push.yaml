@@ -1,15 +1,15 @@
 name: Build and push to DockerHub
 
 on:
-  workflow_dispatch:
+#  workflow_dispatch:
   push:
-    branches:
-      - 'release'
+#    branches:
+#      - 'release'
     tags:
       - 'v*'
 
 jobs:
-  docker:
+  build-test-deploy:
     runs-on: ubuntu-latest
     steps:
       -
@@ -34,11 +34,15 @@ jobs:
           images: |
             robertngo18/sitediff
           tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
+#            type=ref,event=branch
+#            type=ref,event=pr
+#            type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
-            type=sha
+#            type=sha
+
+      -
+        name: Test
+        run: docker run --rm -d ${{ steps.meta.outputs.labels }}:${{ steps.meta.outputs.tags }}
 
       -
         name: Build and push
