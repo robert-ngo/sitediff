@@ -38,8 +38,8 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
 
       -
-        name: Test
-        run: docker run --rm -d ${{ steps.meta.outputs.labels }}:${{ steps.meta.outputs.tags }}
+        name: Test Docker image
+        run: docker run --rm -d ${{ steps.meta.outputs.bake-file-tags }}
 
       -
         name: Build and push
