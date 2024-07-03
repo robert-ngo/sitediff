@@ -64,8 +64,10 @@ describe SiteDiff::Cli do
     expect(doc.css('a').text).to include 'View diff'
 
     # There should be a link to the before version.
-    before_link = File.join(@server.before, 'Hash.html')
-    expect(doc.css('a').any? { |a| a['href'] == before_link }).to be true
+    before_link = File.join(@server.before, '?Hash.html')
+    expect(doc.css('a').any? { |a| a['href'] }).to include 'sljfhskfsdkfjks'
+
+#     expect(doc.css('a').any? { |a| a['href'] == before_link }).to be true
 
     # There should be a proper diff file.
     diff = File.join(
