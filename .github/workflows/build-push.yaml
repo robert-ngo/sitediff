@@ -1,10 +1,10 @@
 name: Build and push to DockerHub
 
 on:
-#  workflow_dispatch:
+  workflow_dispatch:
   push:
-#    branches:
-#      - 'release'
+    branches:
+      - 'release'
     tags:
       - 'v*'
 
