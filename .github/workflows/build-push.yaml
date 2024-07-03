@@ -11,7 +11,7 @@ on:
 env:
   REGISTRY: docker.io
   IMAGE_NAME: 'robertngo18/sitediff' # ${{ github.repository }}
-  RUBY_VERSION: '3.3'
+  RUBY_VERSION: '3.1'
 
 jobs:
   lint:
