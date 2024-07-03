@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
+      - '**' # Match every branch
     tags:
       - 'v*'
 
@@ -26,6 +27,7 @@ jobs:
   build-test-deploy:
     runs-on: ubuntu-latest
     needs: lint
+    if: startsWith(github.event.ref, 'refs/tags/v')
     steps:
       -
         name: "Check out"
