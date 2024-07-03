@@ -39,8 +39,7 @@ jobs:
 
       -
         name: Test Docker image
-        run: docker run --rm -d ${{ steps.meta.outputs.bake-file-tags }}
-
+        run: docker run --rm -d ${{ steps.meta.outputs.tags }}
       -
         name: Build and push
         uses: docker/build-push-action@v6
