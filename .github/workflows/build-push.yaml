@@ -44,7 +44,7 @@ jobs:
       -
         name: Test Docker image
         run: |
-          docker run --rm -d ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }}
+          docker run --rm -d ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 
       -
         name: Build and push
