@@ -8,6 +8,9 @@ on:
     tags:
       - 'v*'
 
+env:
+  IMAGE_NAME: ${{ github.repository }}
+
 jobs:
   build-test-deploy:
     runs-on: ubuntu-latest
@@ -39,7 +42,9 @@ jobs:
 
       -
         name: Test Docker image
-        run: docker run --rm -d ${{ steps.meta.outputs.tags }}
+        run: |
+          docker run --rm -d ${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }}
+
       -
         name: Build and push
         uses: docker/build-push-action@v6
