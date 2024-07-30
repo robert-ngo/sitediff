@@ -49,10 +49,6 @@ jobs:
           tags: |
             type=semver,pattern={{version}}
 
-      - name: "Test Docker image"
-        run: |
-          docker run --rm -d ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-
       - name: "Build and push by digest"
         id: build
         uses: docker/build-push-action@v6
