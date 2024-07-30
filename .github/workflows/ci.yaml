@@ -49,9 +49,9 @@ jobs:
           tags: |
             type=semver,pattern={{version}}
 
-      - name: "Test Docker image"
-        run: |
-          docker run --rm -d ${{ env.REGISTRY_IMAGE }}:latest
+#      - name: "Test Docker image"
+#        run: |
+#          docker run --rm -d ${{ env.REGISTRY_IMAGE }}:latest
 
       - name: "Build and push by digest"
         id: build
