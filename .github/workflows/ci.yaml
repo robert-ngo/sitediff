@@ -45,7 +45,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            ${{ env.IMAGE_NAME }}
+            ${{ env.REGISTRY_IMAGE }}
           tags: |
             type=semver,pattern={{version}}
 
