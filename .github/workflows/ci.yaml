@@ -23,7 +23,7 @@ jobs:
 
     if: startsWith(github.event.ref, 'refs/tags/v')
     steps:
-      - name: Prepare
+      - name: "Prepare"
         run: |
           platform=${{ matrix.platform }}
           echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV   
